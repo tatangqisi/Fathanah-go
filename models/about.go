@@ -9,13 +9,11 @@ type Ab struct {
 }
 
 type Team struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
-	Ig   string `json:"ig"`
-	Fb   string `json:"fb"`
-	Twt  string `json:"twt"`
-	Img  string `json:"img"`
-	Path string `json:"path"`
+	Id        int    `json:"id"`
+	Name      string `json:"name"`
+	Instagram string `json:"ig"`
+	Img       string `json:"img"`
+	Path      string `json:"path"`
 }
 
 type Dab struct {

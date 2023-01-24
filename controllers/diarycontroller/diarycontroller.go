@@ -2,8 +2,8 @@ package diarycontroller
 
 import (
 	"encoding/json"
-	"kammi/helper"
-	"kammi/models"
+	"fathanah/helper"
+	"fathanah/models"
 	"log"
 	"net/http"
 	"strconv"

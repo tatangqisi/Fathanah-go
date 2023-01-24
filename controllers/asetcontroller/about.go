@@ -2,7 +2,7 @@ package asetcontroller
 
 import (
 	"encoding/json"
-	"kammi/models"
+	"fathanah/models"
 	"log"
 	"net/http"
 
@@ -14,21 +14,21 @@ func About(w http.ResponseWriter, _ *http.Request) {
 	team := []models.Team{}
 	Lg := []models.Head{}
 	var response models.Dab
-	result := models.DB.Table("about-data").Select("`about-data`.`id`, `about-data`.`desc`, `about-data`.`name`, `about-data`.`img`, `img-path`.`path`").Joins("INNER JOIN `img-path` ON `about-data`.`path` =`img-path`.`id`").Where("`about-data`.`id` = 1").Scan(&ab).Error
-	if result != nil {
-		log.Print(result.Error())
+	Data := models.DB.Table("about-data").Select("`about-data`.`id`, `about-data`.`desc`, `about-data`.`name`, `about-data`.`img`, `img-asset`.`path`").Joins("INNER JOIN `img-asset` ON `about-data`.`img` =`img-asset`.`id`").Where("`about-data`.`id` = 1").Scan(&ab).Error
+	if Data != nil {
+		log.Print(Data.Error())
 	}
-	result2 := models.DB.Table("about-data").Select("`about-data`.`id`,`about-data`.`desc`, `about-data`.`name`, `about-data`.`img`, `img-path`.`path`").Joins("INNER JOIN `img-path` ON `about-data`.`path` =`img-path`.`id`").Where("`about-data`.`id` = 2").Scan(&ab2).Error
-	if result2 != nil {
-		log.Print(result.Error())
+	Data2 := models.DB.Table("about-data").Select("`about-data`.`id`,`about-data`.`desc`, `about-data`.`name`, `about-data`.`img`, `img-asset`.`path`").Joins("INNER JOIN `img-asset` ON `about-data`.`img` =`img-asset`.`id`").Where("`about-data`.`id` = 2").Scan(&ab2).Error
+	if Data2 != nil {
+		log.Print(Data.Error())
 	}
-	result3 := models.DB.Table("web-team").Scan(&team).Error
-	if result3 != nil {
-		log.Print(result.Error())
+	Data3 := models.DB.Table("admin-data").Scan(&team).Error
+	if Data3 != nil {
+		log.Print(Data.Error())
 	}
-	result4 := models.DB.Table("img-asset").Select("`img-asset`.`id`, `img-asset`.`name`, `img-asset`.`img`, `img-path`.`path`").Joins("INNER JOIN `img-path` ON `img-asset`.`path` =`img-path`.`id`").Where("`img-asset`.`name` = 'Fathanah'").Find(&Lg).Error
-	if result4 != nil {
-		log.Print(result4.Error())
+	Logo := models.DB.Table("img-asset").Select("`img-asset`.`id`, `img-asset`.`name`, `img-asset`.`img`, `img-path`.`path`").Joins("INNER JOIN `img-path` ON `img-asset`.`path` =`img-path`.`id`").Where("`img-asset`.`name` = 'Fathanah'").Find(&Lg).Error
+	if Logo != nil {
+		log.Print(Logo.Error())
 	}
 	//icon
 	Ic := []models.Icon{}

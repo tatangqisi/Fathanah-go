@@ -3,8 +3,8 @@ package authcontroller
 import (
 	"crypto/sha256"
 	"encoding/hex"
-	"kammi/helper"
-	"kammi/models"
+	"fathanah/helper"
+	"fathanah/models"
 	"log"
 	"net/http"
 

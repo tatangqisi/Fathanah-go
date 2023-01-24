@@ -24,7 +24,6 @@ type Ddh struct {
 type Kdh struct {
 	Id   int    `gorm:"primaryKey" json:"id"`
 	Menu string `json:"menu"`
-	Dh2  `json:"judul"`
 }
 
 type Ddh2 struct {

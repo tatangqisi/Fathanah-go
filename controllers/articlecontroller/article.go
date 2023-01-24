@@ -2,9 +2,9 @@ package articlecontroller
 
 import (
 	"encoding/json"
+	"fathanah/helper"
+	"fathanah/models"
 	"fmt"
-	"kammi/helper"
-	"kammi/models"
 	"log"
 	"net/http"
 	"strconv"

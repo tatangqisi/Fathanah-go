@@ -1,18 +1,18 @@
 package main
 
 import (
-	"kammi/controllers/ahd"
-	"kammi/controllers/articlecontroller"
-	"kammi/controllers/asetcontroller"
-	"kammi/controllers/authcontroller"
-	"kammi/controllers/dhariancontroller"
-	"kammi/controllers/diarycontroller"
-	"kammi/controllers/homecontroller"
-	"kammi/controllers/kidscontroller"
-	"kammi/controllers/mssgcontroller"
-	"kammi/controllers/productcontroller"
-	"kammi/controllers/qurancontroller"
-	"kammi/models"
+	"fathanah/controllers/ahd"
+	"fathanah/controllers/articlecontroller"
+	"fathanah/controllers/asetcontroller"
+	"fathanah/controllers/authcontroller"
+	"fathanah/controllers/dhariancontroller"
+	"fathanah/controllers/diarycontroller"
+	"fathanah/controllers/homecontroller"
+	"fathanah/controllers/mssgcontroller"
+	"fathanah/controllers/productcontroller"
+	"fathanah/controllers/qurancontroller"
+	"fathanah/models"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -33,14 +33,12 @@ func main() {
 
 	r.HandleFunc("/ashusna", ahd.Ashusna).Methods("GET")
 	r.HandleFunc("/dharian", dhariancontroller.KDharian).Methods("GET")
-	r.HandleFunc("/dharian/{menu}", dhariancontroller.Show).Methods("GET")
-	r.HandleFunc("/dharian/{menu}", dhariancontroller.Show).Methods("POST")
+	r.HandleFunc("/dharians/{menu}", dhariancontroller.Show).Methods("GET")
+	r.HandleFunc("/dharians/{menu}", dhariancontroller.Show).Methods("POST")
 	r.HandleFunc("/articlee", articlecontroller.Kberita).Methods("GET")
 	r.HandleFunc("/article", articlecontroller.Showm).Methods("GET")
 	r.HandleFunc("/article", articlecontroller.Showm).Methods("POST")
 	r.HandleFunc("/article/{id}", articlecontroller.Show).Methods("GET")
-	r.HandleFunc("/kids", kidscontroller.Mkids).Methods("GET")
-	r.HandleFunc("/kids/{menu}", kidscontroller.Show).Methods("GET")
 	r.HandleFunc("/quran", qurancontroller.Qrnsurah).Methods("GET")
 	r.HandleFunc("/quran", qurancontroller.Qrnsurah).Methods("POST")
 	r.HandleFunc("/quran/{surah}", qurancontroller.Shows).Methods("GET")
@@ -64,5 +62,6 @@ func main() {
 
 	r.HandleFunc("/about", asetcontroller.About).Methods("GET")
 
+	fmt.Println("Connected to port 3000")
 	log.Fatal(http.ListenAndServe(":3000", r))
 }

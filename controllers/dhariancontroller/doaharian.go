@@ -2,9 +2,9 @@ package dhariancontroller
 
 import (
 	"encoding/json"
+	"fathanah/helper"
+	"fathanah/models"
 	"fmt"
-	"kammi/helper"
-	"kammi/models"
 	"log"
 	"net/http"
 	"strconv"
@@ -18,7 +18,7 @@ func KDharian(w http.ResponseWriter, _ *http.Request) {
 	Lg := []models.Head{}
 	Ic := []models.Icon{}
 	var response models.Ddh2
-	if err := models.DB.Table("pray-menu").Select("`pray-menu`.`id`, `pray-menu`.`menu`, `pray-data`.`title`").Joins("INNER JOIN `pray-data` ON `pray-data`.`menu` = `pray-menu`.`id`").Group("`id`").Find(&kdh).Error; err != nil {
+	if err := models.DB.Table("pray-menu").Select("`pray-menu`.`id`, `pray-menu`.`menu`").Group("`pray-menu`.`id`").Find(&kdh).Error; err != nil {
 		response := map[string]string{"message": err.Error()}
 		helper.ResponseJSON(w, http.StatusInternalServerError, response)
 		return

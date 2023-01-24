@@ -1,8 +1,8 @@
 package productcontroller
 
 import (
+	"fathanah/helper"
 	"net/http"
-	"kammi/helper"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {

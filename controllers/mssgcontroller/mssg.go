@@ -1,8 +1,8 @@
 package mssgcontroller
 
 import (
-	"kammi/helper"
-	"kammi/models"
+	"fathanah/helper"
+	"fathanah/models"
 	"log"
 	"net/http"
 	"strconv"
