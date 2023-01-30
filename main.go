@@ -62,6 +62,6 @@ func main() {
 
 	r.HandleFunc("/about", asetcontroller.About).Methods("GET")
 
-	fmt.Println("Connected to port 3000")
-	log.Fatal(http.ListenAndServe(":3000", r))
+	fmt.Println("Connected to port 3030")
+	log.Fatal(http.ListenAndServe(":3030", r))
 }
