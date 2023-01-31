@@ -4,6 +4,7 @@ type Vbrt struct {
 	Id       int    `json:"id"`
 	Img      string `json:"img"`
 	Title    string `json:"judul"`
+	Sinopsis string `json:"sinopsis"`
 	Category string `json:"category"`
 	Desc     string `json:"isi"`
 	Time     string `json:"time"`

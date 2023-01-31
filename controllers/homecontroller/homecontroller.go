@@ -31,7 +31,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	if result2 != nil {
 		log.Print(result2.Error())
 	}
-	result3 := models.DB.Table("article-data").Select("`article-data`.`id`, `article-data`.`time`, `article-data`.`img`, `article-data`.`title`, `article-category`.`category`, `article-data`.`desc`, `img-path`.`path`").Joins("INNER JOIN `img-path` JOIN `article-category` ON `article-data`.`path` =`img-path`.`id` AND `article-data`.`category` =`article-category`.`id`").Limit(5).Order("time DESC").Find(&brt).Error
+	result3 := models.DB.Table("article-data").Select("`article-data`.`id`, `article-data`.`time`, `article-data`.`sinopsis`, `article-data`.`img`, `article-data`.`title`, `article-category`.`category`, `article-data`.`desc`, `img-path`.`path`").Joins("INNER JOIN `img-path` JOIN `article-category` ON `article-data`.`path` =`img-path`.`id` AND `article-data`.`category` =`article-category`.`id`").Limit(5).Order("time DESC").Find(&brt).Error
 	if result3 != nil {
 		log.Print(result3.Error())
 	}

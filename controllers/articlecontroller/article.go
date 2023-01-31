@@ -14,7 +14,7 @@ import (
 )
 
 func Kberita(w http.ResponseWriter, _ *http.Request) {
-	kb := []models.Kbrt{}
+	kb := []models.Cart{}
 	Lg := []models.Head{}
 	var response models.Kdb
 	result := models.DB.Table("article-category").Scan(&kb).Error
@@ -39,10 +39,16 @@ func Kberita(w http.ResponseWriter, _ *http.Request) {
 
 //show berita controller
 func Showm(w http.ResponseWriter, r *http.Request) {
-	var brt []models.Brt
+	var brt []models.Art
 	Lg := []models.Head{}
-	var Ddh models.Dbrt
+	Ac := []models.Cart{}
+	Ic := []models.Icon{}
+	var Ddh models.Dart
 	title := r.FormValue("title")
+	category := models.DB.Table("article-category").Scan(&Ac).Error
+	if category != nil {
+		log.Print(category.Error())
+	}
 	if err := models.DB.Table("article-data").Select("`article-data`.`id`, `article-data`.`time`, `article-data`.`img`, `article-data`.`title`, `article-category`.`category`, `article-data`.`desc`, `img-path`.`path`").Joins("INNER JOIN `article-category` JOIN `img-path` ON `article-data`.`category` = `article-category`.`id` AND `article-data`.`path` =`img-path`.`id`").Where("`article-data`.`title` LIKE ?", fmt.Sprintf("%%%s%%", title)).Find(&brt).Error; err != nil {
 		response := map[string]string{"message": err.Error()}
 		helper.ResponseJSON(w, http.StatusInternalServerError, response)
@@ -52,13 +58,57 @@ func Showm(w http.ResponseWriter, r *http.Request) {
 	if result != nil {
 		log.Print(result.Error())
 	}
-	Ic := []models.Icon{}
 	icon := models.DB.Table("img-asset").Select("`img-asset`.`id`, `img-asset`.`name`, `img-asset`.`img`, `img-path`.`path`").Joins("INNER JOIN `img-path` ON `img-asset`.`path` =`img-path`.`id`").Where("`img-asset`.`name` = 'favicon'").Find(&Ic).Error
 	if icon != nil {
 		log.Print(icon.Error())
 	}
 	Ddh.Icon = Ic
 	Ddh.Logo = Lg
+	Ddh.Category = Ac
+	Ddh.Data = brt
+	w.Header().Set("Content-Type", "appication/json")
+	json.NewEncoder(w).Encode(Ddh)
+}
+
+func Showc(w http.ResponseWriter, r *http.Request) {
+	var brt []models.Art
+	Lg := []models.Head{}
+	Pac := []models.Cart{}
+	Ac := []models.Cart{}
+	Ic := []models.Icon{}
+	var Ddh models.Cartl
+	vars := mux.Vars(r)
+	title := r.FormValue("title")
+	id, err := strconv.ParseInt(vars["id"], 10, 64)
+	if err != nil {
+		helper.ResponseError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	categorypick := models.DB.Table("article-category").Where("id = ?", id).Scan(&Pac).Error
+	if categorypick != nil {
+		log.Print(categorypick.Error())
+	}
+	category := models.DB.Table("article-category").Scan(&Ac).Error
+	if category != nil {
+		log.Print(category.Error())
+	}
+	if err := models.DB.Table("article-data").Select("`article-data`.`id`, `article-data`.`time`, `article-data`.`img`, `article-data`.`title`, `article-category`.`category`, `article-data`.`desc`, `img-path`.`path`").Joins("INNER JOIN `article-category` JOIN `img-path` ON `article-data`.`category` = `article-category`.`id` AND `article-data`.`path` =`img-path`.`id`").Where("`article-data`.`title` LIKE ?", fmt.Sprintf("%%%s%%", title)).Where("`article-category`.`id` = ?", id).Find(&brt).Error; err != nil {
+		response := map[string]string{"message": err.Error()}
+		helper.ResponseJSON(w, http.StatusInternalServerError, response)
+		return
+	}
+	result := models.DB.Table("img-asset").Select("`img-asset`.`id`, `img-asset`.`name`, `img-asset`.`img`, `img-path`.`path`").Joins("INNER JOIN `img-path` ON `img-asset`.`path` =`img-path`.`id`").Where("`img-asset`.`name` = 'Fathanah'").Find(&Lg).Error
+	if result != nil {
+		log.Print(result.Error())
+	}
+	icon := models.DB.Table("img-asset").Select("`img-asset`.`id`, `img-asset`.`name`, `img-asset`.`img`, `img-path`.`path`").Joins("INNER JOIN `img-path` ON `img-asset`.`path` =`img-path`.`id`").Where("`img-asset`.`name` = 'favicon'").Find(&Ic).Error
+	if icon != nil {
+		log.Print(icon.Error())
+	}
+	Ddh.Icon = Ic
+	Ddh.Logo = Lg
+	Ddh.PickC = Pac
+	Ddh.Category = Ac
 	Ddh.Data = brt
 	w.Header().Set("Content-Type", "appication/json")
 	json.NewEncoder(w).Encode(Ddh)
@@ -73,11 +123,11 @@ func Show(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var brt []models.Brt
-	var brtn []models.Brtn
+	var brt []models.Art
+	var brtn []models.Artn
 	Ic := []models.Icon{}
 	Lg := []models.Head{}
-	var Ddh models.Dbrt
+	var Ddh models.Vart
 	if err := models.DB.Table("article-data").Select("`article-data`.`id`, `article-data`.`time`, `article-data`.`img`, `article-data`.`title`, `article-category`.`category`, `article-data`.`desc`, `img-path`.`path`").Joins("INNER JOIN `article-category` JOIN `img-path` ON `article-data`.`category` = `article-category`.`id` AND `article-data`.`path` =`img-path`.`id`").Where("`article-data`.`id`= ?", id).Find(&brt).Error; err != nil {
 		response := map[string]string{"message": err.Error()}
 		helper.ResponseJSON(w, http.StatusInternalServerError, response)

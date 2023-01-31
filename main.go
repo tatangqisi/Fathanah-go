@@ -38,6 +38,8 @@ func main() {
 	r.HandleFunc("/articlee", articlecontroller.Kberita).Methods("GET")
 	r.HandleFunc("/article", articlecontroller.Showm).Methods("GET")
 	r.HandleFunc("/article", articlecontroller.Showm).Methods("POST")
+	r.HandleFunc("/article/category/{id}", articlecontroller.Showc).Methods("GET")
+	r.HandleFunc("/article/category/{id}", articlecontroller.Showc).Methods("POST")
 	r.HandleFunc("/article/{id}", articlecontroller.Show).Methods("GET")
 	r.HandleFunc("/quran", qurancontroller.Qrnsurah).Methods("GET")
 	r.HandleFunc("/quran", qurancontroller.Qrnsurah).Methods("POST")

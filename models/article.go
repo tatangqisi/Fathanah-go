@@ -1,6 +1,6 @@
 package models
 
-type Brt struct {
+type Art struct {
 	Id       int    `json:"id"`
 	Time     string `json:"time"`
 	Img      string `json:"img"`
@@ -10,20 +10,36 @@ type Brt struct {
 	Path     string `json:"path"`
 }
 
-type Brtn struct {
+type Artn struct {
 	Id    int    `json:"id"`
 	Title string `json:"title"`
 	Time  string `json:"time"`
 }
 
-type Dbrt struct {
-	Icon  []Icon
-	Logo  []Head
-	Data  []Brt
-	Data2 []Brtn
+type Dart struct {
+	Icon     []Icon
+	Logo     []Head
+	Category []Cart
+	Data     []Art
 }
 
-type Kbrt struct {
+type Vart struct {
+	Icon     []Icon
+	Logo     []Head
+	Category []Cart
+	Data     []Art
+	Data2    []Artn
+}
+
+type Cartl struct {
+	Icon     []Icon
+	Logo     []Head
+	PickC    []Cart
+	Category []Cart
+	Data     []Art
+}
+
+type Cart struct {
 	Id       int    `gorm:"primaryKey" json:"id"`
 	Category string `json:"category"`
 }
@@ -31,5 +47,5 @@ type Kbrt struct {
 type Kdb struct {
 	Icon []Icon
 	Logo []Head
-	Data []Kbrt
+	Data []Cart
 }
